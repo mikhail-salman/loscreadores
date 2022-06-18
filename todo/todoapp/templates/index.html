@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %} MENTE {% endblock title %}
+{% block content %}
+
+  <br>
+
+  <div style="width: 500px; margin-left: auto; margin-right: auto;">
+
+      <div class="row">
+        <div class="col">
+          <h2>AGREGUE ALGO</h2>
+
+          <form action="/add/" method="post"> {% csrf_token %}
+              <textarea class="form-control" name="contenido" placeholder="ESCRIBA ACÁ"></textarea> <br>
+              <button type="submit" class="btn btn-success mb-3">ENVIAR</button> <br>
+          </form>
+        </div>
+      </div>
+
+      <h4>HOLA, SERÉ SU ASISTENTE.</h4>
+
+      <div class="row mt-4">
+        <div class="col">
+          <ul class="list-group">
+            {% for it in todo %}
+            <li class="list-group-item">{{ it.texto }}
+              <div class="float-end">
+                <form action="/delete_todo/{{it.id}}/" method="post"> {% csrf_token %}
+                  <button type="submit" class="btn btn-sm btn-warning">ELIMINAR</button>
+                </form>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+  </div>
+
+{% endblock content %}
